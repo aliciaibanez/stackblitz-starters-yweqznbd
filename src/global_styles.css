@@ -1,5 +1,7 @@
-@import "@angular/material/prebuilt-themes/indigo-pink.css";
-.pager-spacing {
-    margin-top: 130px;
+.header {
+    position: fixed;
+    top: 0;
+    height: 90px;
+    width: 100%;
+    z-index: 1000;
   }
-  

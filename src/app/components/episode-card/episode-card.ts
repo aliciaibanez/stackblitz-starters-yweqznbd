@@ -1,26 +1,32 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
+import { SimpsonsApi } from '../../services/simpsons-api';
 
-// Mismo que character-card pero adaptado
 @Component({
- selector: 'app-episode-card',
- standalone: true,
- imports: [MatCardModule],
- templateUrl: './episode-card.html',
- styleUrl: './episode-card.css',
+  selector: 'app-episode-card',
+  standalone: true,
+  imports: [MatCardModule],
+  templateUrl: './episode-card.html',
+  styleUrl: './episode-card.css',
 })
 export class EpisodeCard {
 
- @Input() id: number = 0;
- @Input() name!: string;
- @Input() season!: number;
- @Input() episode!: number;
- @Input() image!: string | null;
- @Input() air_date!: string | null;
+  @Input() id: number = 0;
+  @Input() name!: string;
+  @Input() season!: number;
+  @Input() episode_number!: number;
+  @Input() airdate!: string | null;
+  @Input() image_path!: string | null;
 
- @Output() episodeSelected = new EventEmitter<number>();
+  @Output() episodeSelected = new EventEmitter<number>();
 
- onClick() {
-   this.episodeSelected.emit(this.id);
- }
+  constructor(public api: SimpsonsApi) {}
+
+  imageUrl(path: string | null) {
+    return this.api.episodeImageUrl(path);
+  }
+
+  onClick() {
+    this.episodeSelected.emit(this.id);
+  }
 }

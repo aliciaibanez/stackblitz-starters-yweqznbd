@@ -1,11 +1,14 @@
-/* Mismo que character-card pero adaptado */
-
-episode-card {
+.episode-card {
   cursor: pointer;
   height: 100%;
   border: 1px solid #ddd;
   border-radius: 8px;
   background-color: #fff;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
@@ -14,16 +17,35 @@ episode-card {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-mat-card-header,
+/* Header centrado */
+mat-card-header {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Título altura mínima */
+mat-card-title {
+  min-height: 48px;
+}
+
+/* Contenedor imagen fijo */
 .image-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 160px;
+  padding: 10px;
 }
 
+/* Imagen tamaño controlado */
 .image-container img {
-  max-width: 150px;
-  width: 100%;
-  height: auto;
+  max-height: 140px;
+  width: auto;
   object-fit: contain;
+}
+
+/* Contenido texto */
+mat-card-content {
+  text-align: center;
 }

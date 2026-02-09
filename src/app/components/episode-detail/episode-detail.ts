@@ -49,4 +49,8 @@ export class EpisodeDetail {
  ngOnDestroy(): void {
    this.sub?.unsubscribe();
  }
+ imageUrl(path: string | null) {
+  return this.api.episodeImageUrl(path);
+}
+
 }

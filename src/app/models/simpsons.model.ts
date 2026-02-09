@@ -21,8 +21,8 @@ export interface SimpsonsCharacter {
   id: number;
   name: string;
   season: number;
-  episode: number;
-  air_date: string | null;
-  image: string | null;
+  episode_number: number;
+  airdate: string | null;
+  image_path: string | null;
   synopsis: string | null;
 }

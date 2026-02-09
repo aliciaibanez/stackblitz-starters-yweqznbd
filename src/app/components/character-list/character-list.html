@@ -1,31 +1,50 @@
 <div class="pager-spacing"></div>
+
 <h1 class="row m-3">Lista de personajes</h1>
-@if (loading) { <p>Cargando...</p> }
-@if (errorMsg) { <p>{{ errorMsg }}</p> }
-@if (data && !loading) {
- <div class="row ms-2 me-2">
- @for (c of data.results; track c.id) {
- <div class="col-12 col-sm-6 col-md-4 col-xl-3 mb-4">
- <app-character-card
- [id]="c.id"
- [name]="c.name"
- [status]="c.status"
- [occupation]="c.occupation"
- [imgUrl]="portraitUrl(c.portrait_path)"
- (characterSelected)="onCharacterSelected($event)"
- />
- </div>
- }
- </div>
+
+@if (loading) {
+  <p>Cargando...</p>
 }
+
+@if (errorMsg) {
+  <p>{{ errorMsg }}</p>
+}
+
+@if (data && !loading) {
+  <div class="row ms-2 me-2">
+
+    @for (c of data.results; track c.id) {
+
+      <div class="col-12 col-sm-6 col-md-4 col-xl-3 mb-4">
+
+        <app-character-card
+          [id]="c.id"
+          [name]="c.name"
+          [status]="c.status"
+          [occupation]="c.occupation"
+          [imgUrl]="portraitUrl(c.portrait_path)"
+          (characterSelected)="onCharacterSelected($event)"
+        />
+
+      </div>
+
+    }
+
+  </div>
+}
+
 @if (data) {
- <div class="pager">
- <button (click)="prev()" [disabled]="page === 1">
- Anterior
- </button>
- <span> Página {{ page }} / {{ data.pages }} </span>
- <button (click)="next()" [disabled]="!data.next">
- Siguiente
- </button>
- </div>
+  <div class="pager">
+
+    <button (click)="prev()" [disabled]="page === 1">
+      Anterior
+    </button>
+
+    <span> Página {{ page }} / {{ data.pages }} </span>
+
+    <button (click)="next()" [disabled]="!data.next">
+      Siguiente
+    </button>
+
+  </div>
 }

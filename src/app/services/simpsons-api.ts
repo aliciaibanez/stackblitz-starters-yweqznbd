@@ -65,4 +65,10 @@ export class SimpsonsApi {
         )
       );
   }
+  episodeImageUrl(path: string | null): string {
+    if (!path) return '';
+    if (path.startsWith('http')) return path;
+    return `https://cdn.thesimpsonsapi.com/500${path}`;
+  }
+  
 }
