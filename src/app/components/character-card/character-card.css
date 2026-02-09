@@ -1,0 +1,24 @@
+character-card {
+  cursor: pointer;
+  height: 100%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  transition: transform 0.2s, box-shadow 0.2s;
+ }
+ .character-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+ }
+ mat-card-header,
+ .image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ }
+ .image-container img {
+  max-width: 150px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+ }

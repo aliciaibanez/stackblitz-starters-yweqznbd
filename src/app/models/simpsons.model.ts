@@ -1,0 +1,28 @@
+export interface SimpsonsCharacter {
+  id: number;
+  name: string;
+  age: number | null;
+  gender: string | null;
+  birthdate: string | null;
+  occupation: string | null;
+  status: string | null;
+  portrait_path: string | null;
+  phrases: string[];
+ }
+ export interface PaginatedResponse<T> {
+  count: number;
+  next: string | null;
+  prev: string | null;
+  pages: number;
+  results: T[];
+ }
+
+ export interface SimpsonsEpisode {
+  id: number;
+  name: string;
+  season: number;
+  episode: number;
+  air_date: string | null;
+  image: string | null;
+  synopsis: string | null;
+}

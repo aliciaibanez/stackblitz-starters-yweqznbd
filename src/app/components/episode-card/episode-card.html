@@ -1,0 +1,22 @@
+<mat-card class="episode-card" (click)="onClick()">
+<!-- Mismo que character-card pero adaptado -->
+
+<mat-card-header>
+  <mat-card-title>
+    <strong>{{ name }}</strong>
+  </mat-card-title>
+</mat-card-header>
+
+@if (image) {
+  <div class="image-container">
+    <img mat-card-image [src]="image" alt="Imagen del episodio" />
+  </div>
+}
+
+<mat-card-content>
+  <p><strong>Temporada:</strong> {{ season }}</p>
+  <p><strong>Episodio:</strong> {{ episode }}</p>
+  <p><strong>Emisión:</strong> {{ air_date || 'Desconocida' }}</p>
+</mat-card-content>
+
+</mat-card>

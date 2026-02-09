@@ -1,0 +1,28 @@
+<header class="header">
+  <a routerLink="/">
+    <img src="assets/logo.webp" alt="Logo" class="ms-5" />
+  </a>
+  <!-- Buscar -->
+  <mat-form-field appearance="outline" class="search">
+    <input matInput placeholder="Filtrar por nombre" />
+  </mat-form-field>
+
+  <!-- Botón azul para Filtrar -->
+  <button mat-raised-button color="primary">
+    Filtrar
+  </button>
+
+  <!-- Añadimos el menú con los perosnajes y episodios -->
+  <mat-button-toggle-group class="menu">
+
+  <mat-button-toggle>
+    <a routerLink="/characters">Personajes</a>
+  </mat-button-toggle>
+
+  <mat-button-toggle>
+    <a routerLink="/episodes">Episodios</a>
+  </mat-button-toggle>
+
+</mat-button-toggle-group>
+
+</header>

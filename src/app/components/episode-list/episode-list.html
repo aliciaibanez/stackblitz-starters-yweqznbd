@@ -1,0 +1,50 @@
+<div class="pager-spacing"></div>
+
+<h1 class="row m-3">Lista de episodios</h1>
+
+@if (loading) { <p>Cargando...</p> }
+
+@if (errorMsg) { <p>{{ errorMsg }}</p> }
+
+@if (data && !loading) {
+
+ <div class="row ms-2 me-2">
+
+  @for (e of data.results; track e.id) {
+
+   <div class="col-12 col-sm-6 col-md-4 col-xl-3 mb-4">
+
+    <app-episode-card
+      [id]="e.id"
+      [name]="e.name"
+      [season]="e.season"
+      [episode]="e.episode"
+      [image]="e.image"
+      [air_date]="e.air_date"
+      (episodeSelected)="onEpisodeSelected($event)"
+    />
+
+   </div>
+
+  }
+
+ </div>
+}
+
+@if (data) {
+
+ <div class="pager">
+
+  <button (click)="prev()" [disabled]="page === 1">
+   Anterior
+  </button>
+
+  <span> Página {{ page }} / {{ data.pages }} </span>
+
+  <button (click)="next()" [disabled]="!data.next">
+   Siguiente
+  </button>
+
+ </div>
+
+}

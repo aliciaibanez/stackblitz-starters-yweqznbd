@@ -1,0 +1,32 @@
+<h1 class="row m-3">Detalles del personaje</h1>
+@if (loading) {
+ <p>Cargando detalle...</p>
+}
+@if (errorMsg) {
+ <p>{{ errorMsg }}</p>
+}
+@if (character && !loading) {
+ <div class="detail m-3">
+ <div class="w-100">
+ @if (character.portrait_path) {
+ <img
+ [src]="portraitUrl(character.portrait_path)"
+ alt="Imagen"
+ class="mx-auto d-block"
+ />
+ }
+ </div>
+ <h2 class="my-4">{{ character.name }}</h2>
+ <p><strong>Estado:</strong> {{ character.status || 'Desconocido' }}</p>
+ <p><strong>Ocupación:</strong> {{ character.occupation || 'Desconocida' }}</p>
+ <p><strong>Género:</strong> {{ character.gender || 'Desconocido' }}</p>
+ <p><strong>Edad:</strong> {{ character.age ?? '—' }}</p>
+ <h3>Frases</h3>
+ <ul>
+ @for (p of character.phrases; track p) {
+ <li>{{ p }}</li>
+ }
+ </ul>
+ <button routerLink="/characters">Volver al listado</button>
+ </div>
+}
