@@ -1,28 +1,41 @@
 <header class="header">
-  <a routerLink="/">
-    <img src="assets/logo.webp" alt="Logo" class="ms-5" />
-  </a>
-  <!-- Buscar -->
-  <mat-form-field appearance="outline" class="search">
-    <input matInput placeholder="Filtrar por nombre" />
-  </mat-form-field>
 
-  <!-- Botón azul para Filtrar -->
-  <button mat-raised-button color="primary">
-    Filtrar
-  </button>
+  <!-- IZQUIERDA — LOGO -->
+  <div class="header-left">
+    <a routerLink="/characters">
+      <img src="assets/logo.webp" alt="Logo">
+    </a>
+  </div>
 
-  <!-- Añadimos el menú con los perosnajes y episodios -->
-  <mat-button-toggle-group class="menu">
+  <!-- CENTRO — BUSCADOR -->
+  @if (showSearch()) {
+  <div class="header-center">
 
-    <mat-button-toggle>
-      <a routerLink="/characters">Personajes</a>
-    </mat-button-toggle>
+    <mat-form-field appearance="outline">
+      <input matInput
+             placeholder="Filtrar por nombre"
+             [(ngModel)]="searchText">
+    </mat-form-field>
 
-    <mat-button-toggle>
-      <a routerLink="/episodes">Episodios</a>
-    </mat-button-toggle>
+    <button mat-raised-button color="primary" (click)="onSearch()">
+      Filtrar
+    </button>
 
-  </mat-button-toggle-group>
+    @if (searchText) {
+      <button mat-stroked-button (click)="clearSearch()">
+        Limpiar
+      </button>
+    }
+
+  </div>
+  }
+
+  <!-- DERECHA — MENÚ -->
+  <div class="header-right">
+
+    <a routerLink="/characters">Personajes</a>
+    <a routerLink="/episodes">Episodios</a>
+
+  </div>
 
 </header>

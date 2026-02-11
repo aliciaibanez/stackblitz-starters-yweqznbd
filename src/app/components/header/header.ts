@@ -1,25 +1,47 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { MatButtonToggleModule } from '@angular/material/button-toggle'; // Personajes / Episodios
+import { Router, RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
-
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-
-  // Importamos los módulos nuevos
   imports: [
     RouterLink,
+    FormsModule,
     MatButtonToggleModule,
     MatFormFieldModule,
-    MatButtonModule,
     MatInputModule,
+    MatButtonModule
   ],
   templateUrl: './header.html',
-  styleUrls: ['./header.css'],
+  styleUrl: './header.css'
 })
-export class Header {}
+export class Header {
+
+  searchText = '';
+
+  constructor(
+    public router: Router,
+    private search: SearchService
+  ) {}
+
+  onSearch() {
+    this.search.setTerm(this.searchText);
+  }
+
+  clearSearch() {
+    this.searchText = '';
+    this.search.clear();
+  }
+
+  showSearch(): boolean {
+    return this.router.url === '/characters' || this.router.url === '/episodes';
+  }
+}

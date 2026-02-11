@@ -1,51 +1,31 @@
 <div class="pager-spacing"></div>
 
-<h1 class="row m-3">Lista de episodios</h1>
+<h1>Lista de episodios</h1>
 
-@if (loading) {
-  <p>Cargando...</p>
+@if (filtered) {
+<div class="row">
+@for (e of filtered; track e.id) {
+
+<div class="col-md-3 mb-3">
+  <app-episode-card
+    [id]="e.id"
+    [name]="e.name"
+    [season]="e.season"
+    [episode_number]="e.episode_number"
+    [airdate]="e.airdate"
+    [image_path]="e.image_path"
+    (episodeSelected)="onEpisodeSelected($event)">
+  </app-episode-card>
+</div>
+
 }
-
-@if (errorMsg) {
-  <p>{{ errorMsg }}</p>
-}
-
-@if (data && !loading) {
-  <div class="row ms-2 me-2">
-
-    @for (c of data.results; track c.id) {
-
-      <div class="col-12 col-sm-6 col-md-4 col-xl-3 mb-4">
-
-        <app-episode-card
-          [id]="c.id"
-          [name]="c.name"
-          [season]="c.season"
-          [episode_number]="c.episode_number"
-          [airdate]="c.airdate"
-          [image_path]="c.image_path"
-          (episodeSelected)="onEpisodeSelected($event)"
-        />
-
-      </div>
-
-    }
-
-  </div>
+</div>
 }
 
 @if (data) {
-  <div class="pager">
-
-    <button (click)="prev()" [disabled]="page === 1">
-      Anterior
-    </button>
-
-    <span> Página {{ page }} / {{ data.pages }} </span>
-
-    <button (click)="next()" [disabled]="!data.next">
-      Siguiente
-    </button>
-
-  </div>
+<div class="pager">
+<button (click)="prev()" [disabled]="page===1">Anterior</button>
+<span>Página {{page}} / {{data.pages}}</span>
+<button (click)="next()" [disabled]="!data.next">Siguiente</button>
+</div>
 }
