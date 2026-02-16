@@ -2,30 +2,30 @@
 
 <h1>Lista de episodios</h1>
 
+<!-- Si filtered tiene datos, muestra la lista -->
 @if (filtered) {
 <div class="row">
-@for (e of filtered; track e.id) {
 
-<div class="col-md-3 mb-3">
-  <app-episode-card
-    [id]="e.id"
-    [name]="e.name"
-    [season]="e.season"
-    [episode_number]="e.episode_number"
-    [airdate]="e.airdate"
-    [image_path]="e.image_path"
-    (episodeSelected)="onEpisodeSelected($event)">
-  </app-episode-card>
-</div>
+  <!-- Recorre cada episodio del array filtered y crea una tarjeta por cada uno -->
+  @for (e of filtered; track e.id) {
 
-}
+  <div class="col-md-3 mb-3">
+    <!-- Componente hijo al que se le pasan los datos del episodio -->
+    <!-- Muestra un card por resultado -->
+    <app-episode-card [id]="e.id" [name]="e.name" [season]="e.season" [episode_number]="e.episode_number"
+      [airdate]="e.airdate" [image_path]="e.image_path" (episodeSelected)="onEpisodeSelected($event)">
+    </app-episode-card>
+  </div>
+
+  }
 </div>
 }
 
+<!-- Muestra el paginador solo cuando ya existen datos cargados -->
 @if (data) {
 <div class="pager">
-<button (click)="prev()" [disabled]="page===1">Anterior</button>
-<span>Página {{page}} / {{data.pages}}</span>
-<button (click)="next()" [disabled]="!data.next">Siguiente</button>
+  <button (click)="prev()" [disabled]="page===1">Anterior</button>
+  <span>Página {{page}} / {{data.pages}}</span>
+  <button (click)="next()" [disabled]="!data.next">Siguiente</button>
 </div>
 }

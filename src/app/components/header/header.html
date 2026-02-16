@@ -1,36 +1,37 @@
 <header class="header">
 
-  <!-- IZQUIERDA — LOGO -->
+  <!-- Logo de la izq -->
   <div class="header-left">
     <a routerLink="/characters">
       <img src="assets/logo.webp" alt="Logo">
     </a>
   </div>
 
-  <!-- CENTRO — BUSCADOR -->
+  <!--Buscador en el centro -->
+  <!-- controla si aparece o no el buscador -->
   @if (showSearch()) {
   <div class="header-center">
 
     <mat-form-field appearance="outline">
-      <input matInput
-             placeholder="Filtrar por nombre"
-             [(ngModel)]="searchText">
+      <!-- Guarda lo que escribe el usuario en la variable searchText -->
+      <input matInput placeholder="Filtrar por nombre" [(ngModel)]="searchText">
     </mat-form-field>
-
+    <!-- Cuando se pulsa Filtrar, se envía el texto al servicio -->
     <button mat-raised-button color="primary" (click)="onSearch()">
       Filtrar
     </button>
 
+    <!-- Solo aparece si searchText tiene contenido. Limpia el input searchText -->
     @if (searchText) {
-      <button mat-stroked-button (click)="clearSearch()">
-        Limpiar
-      </button>
+    <button mat-stroked-button (click)="clearSearch()">
+      Limpiar
+    </button>
     }
 
   </div>
   }
 
-  <!-- DERECHA — MENÚ -->
+  <!--Menú de la dch -->
   <div class="header-right">
 
     <a routerLink="/characters">Personajes</a>

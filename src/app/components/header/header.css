@@ -26,8 +26,32 @@
   gap: 12px;
 }
 
+/* Buscador más largo */
 .header-center mat-form-field {
-  width: 260px;
+  width: 320px;
+  margin: 0;
+}
+
+/* 🔥 Reducir altura total del campo */
+.header-center .mat-mdc-text-field-wrapper {
+  height: 32px !important;
+  border-radius: 20px !important;
+  display: flex;
+  align-items: center;
+}
+
+/* Quitar padding vertical interno que añade Material */
+.header-center .mat-mdc-form-field-infix {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  min-height: unset !important;
+}
+
+/* Ajustar input interno */
+.header-center input {
+  height: 32px;
+  line-height: 32px;
+  padding: 0 12px;
 }
 
 /* DERECHA */

@@ -7,76 +7,105 @@ import { PaginatedResponse, SimpsonsEpisode } from '../../models/simpsons.model'
 import { SimpsonsApi } from '../../services/simpsons-api';
 import { SearchService } from '../../services/search.service';
 
+/*Pide los episodios a la API
+- Escucha el buscador
+- Filtra los resultados
+- Controla la paginación
+- Navega al detalle*/
 @Component({
- selector: 'app-episode-list',
- standalone: true,
- imports: [EpisodeCard],
- templateUrl: './episode-list.html',
- styleUrl: './episode-list.css'
+  selector: 'app-episode-list',
+  standalone: true,
+  imports: [EpisodeCard],
+  templateUrl: './episode-list.html',
+  styleUrl: './episode-list.css'
 })
 export class EpisodeList {
 
- page = 1;
- data: PaginatedResponse<SimpsonsEpisode> | null = null;
- filtered: SimpsonsEpisode[] = [];
+  page = 1; // Guarda la pag actual
 
- loading = false;
- errorMsg = '';
+  // Se guarda la respuesta de la API. null = no hay datos todavia
+  data: PaginatedResponse<SimpsonsEpisode> | null = null;
 
- private sub?: Subscription;
- private searchSub?: Subscription;
+  // Episodios filtrados.
+  filtered: SimpsonsEpisode[] = [];
 
- constructor(
-   public api: SimpsonsApi,
-   private router: Router,
-   private cdr: ChangeDetectorRef,
-   private search: SearchService
- ) {}
+  loading = false;
+  errorMsg = '';
 
- ngOnInit() {
-   this.loadData();
 
-   this.searchSub = this.search.term$.subscribe(term => {
-     this.applyFilter(term);
-   });
- }
+  private sub?: Subscription; // Escucha a la Api
+  private searchSub?: Subscription; // Escucha al Buscador
 
- ngOnDestroy() {
-   this.sub?.unsubscribe();
-   this.searchSub?.unsubscribe();
- }
+  /*
+  - SimpsonsApi	Pedir episodios
+  - Router	Navegar
+  - ChangeDetectorRef	Forzar actualización
+  - SearchService	Escuchar búsqueda
+  */
+  constructor(
+    public api: SimpsonsApi,
+    private router: Router,
+    private cdr: ChangeDetectorRef,
+    private search: SearchService
+  ) { }
 
- loadData() {
-   this.loading = true;
-   this.sub?.unsubscribe();
+  /*
+  Cuando el componente se crea:
+  1. Llama a la API
+  2️. Se suscribe al buscador
+  Cada vez que cambie el texto del Header se ejecuta applyFilter(term)*/
+  ngOnInit() {
+    this.loadData();
 
-   this.sub = this.api.getEpisodes(this.page).subscribe({
-     next: data => {
-       this.data = data;
-       this.filtered = data.results;
-       this.loading = false;
-       this.cdr.detectChanges();
-     },
-     error: err => {
-       this.errorMsg = err?.message ?? 'Error';
-       this.loading = false;
-     }
-   });
- }
+    this.searchSub = this.search.term$.subscribe(term => {
+      this.applyFilter(term);
+    });
+  }
 
- applyFilter(term: string) {
-   if (!this.data) return;
+  // Cancela las suscripciones.
+  ngOnDestroy() {
+    this.sub?.unsubscribe();
+    this.searchSub?.unsubscribe();
+  }
 
-   const t = term.toLowerCase();
-   this.filtered = this.data.results.filter(e =>
-     e.name.toLowerCase().includes(t)
-   );
- }
+  // Llama a la API, Guarda los datos originales y muestra todos (sin filtro inicialmente)
+  loadData() {
+    this.loading = true;
+    this.sub?.unsubscribe();
 
- onEpisodeSelected(id:number){
-   this.router.navigate(['/episode', id]);
- }
+    this.sub = this.api.getEpisodes(this.page).subscribe({
+      next: data => {
+        this.data = data;
+        this.filtered = data.results;
+        this.loading = false;
+        this.cdr.detectChanges();
+      },
+      error: err => {
+        this.errorMsg = err?.message ?? 'Error';
+        this.loading = false;
+      }
+    });
+  }
 
- next(){ this.page++; this.loadData(); }
- prev(){ if(this.page>1){ this.page--; this.loadData(); }}
+  /*
+  Toma los datos originales
+  Filtra por nombre
+  Actualiza filtered
+  */
+  applyFilter(term: string) {
+    if (!this.data) return;
+
+    // COnvierte a minusculas y giltra los resultados
+    const t = term.toLowerCase();
+    this.filtered = this.data.results.filter(e =>
+      e.name.toLowerCase().includes(t)
+    );
+  }
+  // Si episodio seleccionado, navega al detalle
+  onEpisodeSelected(id: number) {
+    this.router.navigate(['/episode', id]);
+  }
+
+  next() { this.page++; this.loadData(); }
+  prev() { if (this.page > 1) { this.page--; this.loadData(); } }
 }

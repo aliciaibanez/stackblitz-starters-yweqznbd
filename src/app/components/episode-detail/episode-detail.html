@@ -1,38 +1,35 @@
 <h1 class="row m-3">Detalle del episodio</h1>
 
 @if (loading) {
-  <p>Cargando detalle...</p>
+<p>Cargando detalle...</p>
 }
 
 @if (errorMsg) {
-  <p>{{ errorMsg }}</p>
+<p>{{ errorMsg }}</p>
 }
 
 @if (episode && !loading) {
 
-  <div class="detail m-3">
+<div class="detail m-3">
 
-    @if (episode.image_path) {
-      <img
-        [src]="imageUrl(episode.image_path)"
-        class="mx-auto d-block"
-      />
-    }
+  @if (episode.image_path) {
+  <img [src]="imageUrl(episode.image_path)" class="mx-auto d-block" />
+  }
 
-    <h2 class="my-4">{{ episode.name }}</h2>
+  <h2 class="my-4">{{ episode.name }}</h2>
 
-    <p><strong>Temporada:</strong> {{ episode.season }}</p>
-    <p><strong>Episodio:</strong> {{ episode.episode_number }}</p>
-    <p><strong>Fecha emisión:</strong> {{ episode.airdate || '—' }}</p>
+  <p><strong>Temporada:</strong> {{ episode.season }}</p>
+  <p><strong>Episodio:</strong> {{ episode.episode_number }}</p>
+  <p><strong>Fecha emisión:</strong> {{ episode.airdate || '—' }}</p>
 
-    @if (episode.synopsis) {
-      <h3>Sinopsis</h3>
-      <p>{{ episode.synopsis }}</p>
-    }
+  @if (episode.synopsis) {
+  <h3>Sinopsis</h3>
+  <p>{{ episode.synopsis }}</p>
+  }
 
-    <button routerLink="/episodes">
-      Volver al listado
-    </button>
+  <button routerLink="/episodes">
+    Volver al listado
+  </button>
 
-  </div>
+</div>
 }

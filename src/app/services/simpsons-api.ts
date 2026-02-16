@@ -1,22 +1,31 @@
+// HttpClient es el servicio de Angular para hacer peticiones HTTP (GET, POST, etc).
 import { HttpClient } from '@angular/common/http';
+//Para que Angular pueda inyectar este servicio.
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs'; // Errores, errores personalizados, escuchas
+// Modelos
 import { PaginatedResponse, SimpsonsCharacter, SimpsonsEpisode } from '../models/simpsons.model';
 
+//Injectable = Esta clase es un servicio que puede utilizarse en otros sitios
 @Injectable({
   providedIn: 'root',
 })
+
+// Clase para conmunicarse con la API
 export class SimpsonsApi {
+  //Guarda la URL base para no repetirla
   private readonly baseUrl = 'https://thesimpsonsapi.com/api';
 
-  constructor(private http: HttpClient) {}
+  //Angular inyecta automáticamente HttpClient
+  constructor(private http: HttpClient) { }
 
-  // Página 1 (o la que sea)
+  // Recibe un no. de página. Por defecto 1
   getCharacters(page = 1): Observable<PaginatedResponse<SimpsonsCharacter>> {
     return this.http
       .get<PaginatedResponse<SimpsonsCharacter>>(
         `${this.baseUrl}/characters?page=${page}`
       )
+      //Si la API falla: Se captura el error y se lanza uno personalizado
       .pipe(
         catchError(() =>
           throwError(() => new Error('Error cargando personajes'))
@@ -42,8 +51,8 @@ export class SimpsonsApi {
   }
 
   // Métodos nuevos para los episodios (base los de character)
-   // Listado paginado de episodios
-   getEpisodes(page = 1): Observable<PaginatedResponse<SimpsonsEpisode>> {
+  // Listado paginado de episodios
+  getEpisodes(page = 1): Observable<PaginatedResponse<SimpsonsEpisode>> {
     return this.http
       .get<PaginatedResponse<SimpsonsEpisode>>(
         `${this.baseUrl}/episodes?page=${page}`
@@ -70,5 +79,5 @@ export class SimpsonsApi {
     if (path.startsWith('http')) return path;
     return `https://cdn.thesimpsonsapi.com/500${path}`;
   }
-  
+
 }

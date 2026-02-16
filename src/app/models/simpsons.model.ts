@@ -8,16 +8,17 @@ export interface SimpsonsCharacter {
   status: string | null;
   portrait_path: string | null;
   phrases: string[];
- }
- export interface PaginatedResponse<T> {
+}
+
+export interface PaginatedResponse<T> {
   count: number;
   next: string | null;
   prev: string | null;
   pages: number;
-  results: T[];
- }
+  results: T[]; //Esto es una estructura genérica que puede contener cualquier tipo
+}
 
- export interface SimpsonsEpisode {
+export interface SimpsonsEpisode {
   id: number;
   name: string;
   season: number;

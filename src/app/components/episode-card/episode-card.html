@@ -1,15 +1,24 @@
 <mat-card class="character-card" (click)="onClick()">
 
   <mat-card-header>
-    <mat-card-title><strong>{{ name }}</strong></mat-card-title>
+    <mat-card-title><strong>{{ name }}</strong></mat-card-title> <!-- Viene de EpisodeList -->
   </mat-card-header>
 
+  <!-- Solo muestra imagen si existe. -->
   @if (image_path) {
-    <div class="image-container">
-      <img mat-card-image [src]="imageUrl(image_path)" />
-    </div>
-  }
+  <div class="image-container">
 
+    <!-- La API devuelve solo una ruta
+          imageUrl() construye la URL completa
+          [src] la pone en la etiqueta <img>
+          La imagen se muestra -->
+    <img mat-card-image [src]="imageUrl(image_path)" />
+  </div>
+  }
+  <!-- Viene de la API
+  Pasa por EpisodeList
+  Se envía como Input
+  Se muestra en el hijo -->
   <mat-card-content>
     <p><strong>Temporada:</strong> {{ season }}</p>
     <p><strong>Episodio:</strong> {{ episode_number }}</p>

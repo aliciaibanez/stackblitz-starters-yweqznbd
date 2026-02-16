@@ -12,6 +12,14 @@ import { CharacterDetail } from './app/components/character-detail/character-det
 import { EpisodeList } from './app/components/episode-list/episode-list';
 import { EpisodeDetail } from './app/components/episode-detail/episode-detail';
 
+/*Declara el componente raíz
+
+Configura las rutas
+
+Configura servicios globales
+
+Arranca la aplicación*/
+
 @Component({
   selector: 'app-root',
   imports: [

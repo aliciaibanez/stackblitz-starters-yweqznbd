@@ -4,27 +4,22 @@
 
 @if (filtered) {
 <div class="row">
-@for (c of filtered; track c.id) {
+  @for (c of filtered; track c.id) {
 
-<div class="col-md-3 mb-3">
-  <app-character-card
-    [id]="c.id"
-    [name]="c.name"
-    [status]="c.status"
-    [occupation]="c.occupation"
-    [imgUrl]="portraitUrl(c.portrait_path)"
-    (characterSelected)="onCharacterSelected($event)">
-  </app-character-card>
-</div>
+  <div class="col-md-3 mb-3">
+    <app-character-card [id]="c.id" [name]="c.name" [status]="c.status" [occupation]="c.occupation"
+      [imgUrl]="portraitUrl(c.portrait_path)" (characterSelected)="onCharacterSelected($event)">
+    </app-character-card>
+  </div>
 
-}
+  }
 </div>
 }
 
 @if (data) {
 <div class="pager">
-<button (click)="prev()" [disabled]="page===1">Anterior</button>
-<span>Página {{page}} / {{data.pages}}</span>
-<button (click)="next()" [disabled]="!data.next">Siguiente</button>
+  <button (click)="prev()" [disabled]="page===1">Anterior</button>
+  <span>Página {{page}} / {{data.pages}}</span>
+  <button (click)="next()" [disabled]="!data.next">Siguiente</button>
 </div>
 }
