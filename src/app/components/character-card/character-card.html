@@ -1,14 +1,14 @@
 <mat-card class="character-card" (click)="onClick()">
-<mat-card-header>
-<mat-card-title><strong>{{ name }}</strong></mat-card-title>
-</mat-card-header>
-@if (imgUrl) {
-<div class="image-container">
-<img mat-card-image [src]="imgUrl" alt="Imagen del personaje" />
-</div>
-}
-<mat-card-content>
-<p><strong>Estado:</strong> {{ status || 'Desconocido' }}</p>
-<p><strong>Ocupación:</strong> {{ occupation || 'Desconocida' }}</p>
-</mat-card-content>
+    <mat-card-header>
+        <mat-card-title><strong>{{ name }}</strong></mat-card-title>
+    </mat-card-header>
+    @if (imgUrl) {
+    <div class="image-container">
+        <img mat-card-image [src]="imgUrl" alt="Imagen del personaje" />
+    </div>
+    }
+    <mat-card-content>
+        <p><strong>Estado:</strong> {{ status || 'Desconocido' }}</p>
+        <p><strong>Ocupación:</strong> {{ occupation || 'Desconocida' }}</p>
+    </mat-card-content>
 </mat-card>

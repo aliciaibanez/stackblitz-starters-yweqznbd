@@ -23,7 +23,7 @@ export class SearchService {
 
   /*term$ es un Observable.
   -Solo permite escuchar cambios
-  -No permite modificar el valor directamente (no tiene acceso a next())
+  -No permite modificar el valor directamente
   -Solo el servicio puede cambiar el valor (con next())
   -Los componentes solo pueden escuchar
   */

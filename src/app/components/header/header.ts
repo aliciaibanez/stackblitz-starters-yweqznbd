@@ -1,6 +1,5 @@
 // Imports necesarios para que el componente funcione
 
-
 // Crear componente con Angular
 import { Component } from '@angular/core';
 

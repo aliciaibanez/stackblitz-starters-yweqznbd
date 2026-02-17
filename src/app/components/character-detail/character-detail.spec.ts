@@ -10,7 +10,7 @@ describe('CharacterDetail', () => {
     await TestBed.configureTestingModule({
       imports: [CharacterDetail]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(CharacterDetail);
     component = fixture.componentInstance;

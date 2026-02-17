@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 @Component({
- selector: 'app-footer',
- imports: [],
- templateUrl: './footer.html',
- styleUrl: './footer.css',
+    selector: 'app-footer',
+    imports: [],
+    templateUrl: './footer.html',
+    styleUrl: './footer.css',
 })
 export class Footer {
- author = 'Alicia Ibáñez Escudero';
- version = '1.0.0';
+    author = 'Alicia Ibáñez Escudero';
+    version = '1.0.0';
 }

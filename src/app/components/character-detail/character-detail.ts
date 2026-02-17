@@ -19,7 +19,7 @@ export class CharacterDetail {
     private route: ActivatedRoute,
     public api: SimpsonsApi,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
   ngOnInit(): void {
     this.loading = true;
     const id = Number(this.route.snapshot.paramMap.get('id'));

@@ -49,6 +49,8 @@ export class SimpsonsApi {
         )
       );
   }
+  
+////////////////////////////////////////////////////////////////////////////////////////
 
   // Métodos nuevos para los episodios (base los de character)
   // Listado paginado de episodios

@@ -1,18 +1,23 @@
 <h1 class="row m-3">Detalle del episodio</h1>
 
+<!-- Si la variable loading es true, se muestra el mensaje -->
 @if (loading) {
 <p>Cargando detalle...</p>
 }
-
+<!-- Cuando falla la petición -->
 @if (errorMsg) {
 <p>{{ errorMsg }}</p>
 }
 
+<!-- Mostrar contenido cuando ya hay datos -->
 @if (episode && !loading) {
 
 <div class="detail m-3">
 
+  <!-- Solo se muestra si episode.image_path tiene valor -->
   @if (episode.image_path) {
+
+  <!-- imageUrl(episode.image_path) - Método del componente que genera la URL completa de la imagen. -->
   <img [src]="imageUrl(episode.image_path)" class="mx-auto d-block" />
   }
 
@@ -22,11 +27,13 @@
   <p><strong>Episodio:</strong> {{ episode.episode_number }}</p>
   <p><strong>Fecha emisión:</strong> {{ episode.airdate || '—' }}</p>
 
+  <!-- Solo aparece si existe sinopsis -->
   @if (episode.synopsis) {
   <h3>Sinopsis</h3>
   <p>{{ episode.synopsis }}</p>
   }
 
+  <!-- Navega a la ruta /episodes -->
   <button routerLink="/episodes">
     Volver al listado
   </button>

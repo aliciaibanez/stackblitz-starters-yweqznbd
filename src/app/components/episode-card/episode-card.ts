@@ -46,7 +46,7 @@ export class EpisodeCard {
   // Número de temporada
 
   @Input() episode_number!: number;
-  // Número de episodio dentro de la temporada
+  // Número de episodio
 
   @Input() airdate!: string | null;
   // Fecha de emisión (puede ser null si no existe)
